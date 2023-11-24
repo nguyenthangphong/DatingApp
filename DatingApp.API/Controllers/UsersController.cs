@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace DatingApp.API.Controllers
 {
     [Authorize]
-    public class UserController : BaseApiController
+    public class UsersController : BaseApiController
     {
         private IUserRepository _userRepository;
         private IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;

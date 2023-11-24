@@ -14,7 +14,7 @@ namespace DatingApp.API.Data
 
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
             var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
-            var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            var users = JsonSerializer.Deserialize<List<AppUser>>(userData, options);
             foreach (var user in users)
             {
                 using var hmac = new HMACSHA512();
