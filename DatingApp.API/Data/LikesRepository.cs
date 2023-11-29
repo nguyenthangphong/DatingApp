@@ -1,11 +1,11 @@
-using DatingApp.API.Data;
+using DatingApp.API.Interfaces;
 using DatingApp.API.DTOs;
 using DatingApp.API.Entities;
 using DatingApp.API.Extensions;
 using DatingApp.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatingApp.API.Interfaces
+namespace DatingApp.API.Data
 {
     public class LikesRepository : ILikesRepository
     {
