@@ -14,7 +14,7 @@ namespace DatingApp.API.DTOs
         public string Gender { get; set; }
 
         [Required]
-        public DateOnly? DateOfBirth { get; set; } // optional to make required work
+        public DateOnly? DateOfBirth { get; set; }
 
         [Required]
         public string City { get; set; }
