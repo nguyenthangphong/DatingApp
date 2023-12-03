@@ -26,7 +26,9 @@ namespace DatingApp.API.Middleware
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
+
                 context.Response.ContentType = "application/json";
+                
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                 var response = _env.IsDevelopment()

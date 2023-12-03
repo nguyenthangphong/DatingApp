@@ -24,17 +24,20 @@ namespace DatingApp.API.Data
         public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
         {
             var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
+
             var likes = _context.Likes.AsQueryable();
 
             if (likesParams.Predicate == "liked") 
             {
                 likes = likes.Where(like => like.SourceUserId == likesParams.UserId);
+
                 users = likes.Select(like => like.TargetUser);
             }
 
             if (likesParams.Predicate == "likedBy") 
             {
                 likes = likes.Where(like => like.TargetUserId == likesParams.UserId);
+                
                 users = likes.Select(like => like.SourceUser);
             }
 

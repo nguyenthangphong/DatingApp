@@ -30,7 +30,9 @@ namespace DatingApp.API.Data
             foreach (var user in users)
             {
                 user.UserName = user.UserName.ToLower();
+
                 await userManager.CreateAsync(user, "Pa$$w0rd");
+
                 await userManager.AddToRoleAsync(user, "Member");
             }
 
@@ -40,6 +42,7 @@ namespace DatingApp.API.Data
             };
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
+            
             await userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
         }
     }

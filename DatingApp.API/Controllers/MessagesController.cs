@@ -32,6 +32,7 @@ namespace DatingApp.API.Controllers
             }
 
             var sender = await _userRepository.GetUserByUsernameAsync(username);
+
             var recipient = await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
             if (recipient == null) return NotFound();
@@ -48,6 +49,7 @@ namespace DatingApp.API.Controllers
             _messageRepository.AddMessage(message);
 
             if (await _messageRepository.SaveAllAsync()) return Ok(_mapper.Map<MessageDto>(message));
+
             return BadRequest("Failed to send message");
         }
 
@@ -55,8 +57,11 @@ namespace DatingApp.API.Controllers
         public async Task<ActionResult<PagedList<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
         {
             messageParams.Username = User.GetUsername();
+
             var messages = await _messageRepository.GetMessagesForUser(messageParams);
+
             Response.AddPaginationHeader(new PaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages));
+
             return messages;
         }
 
@@ -64,6 +69,7 @@ namespace DatingApp.API.Controllers
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
         {
             var currentUsername = User.GetUsername();
+
             return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
         }
 
@@ -71,6 +77,7 @@ namespace DatingApp.API.Controllers
         public async Task<ActionResult> DeleteMessage(int id)
         {
             var username = User.GetUsername();
+
             var message = await _messageRepository.GetMessage(id);
 
             if (message.SenderUsername != username && message.RecipientUsername != username) return Unauthorized();
@@ -85,6 +92,7 @@ namespace DatingApp.API.Controllers
             }
 
             if (await _messageRepository.SaveAllAsync()) return Ok();
+            
             return BadRequest("Problem deleting the message");
         }
     }

@@ -16,6 +16,7 @@ namespace DatingApp.API.Services
         public TokenService(IConfiguration configuration, UserManager<AppUser> userManager)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
+        
             _userManager = userManager;
         }
 
